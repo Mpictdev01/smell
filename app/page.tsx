@@ -239,18 +239,11 @@ export default function Home() {
                     )}
 
                     {item.type === "reddit" && item.url && (
-                      <div className="flex flex-col items-center p-2 m-2">
-                        <iframe
-                          id={`reddit-embed-${item.id}`}
-                          src={item.url}
-                          sandbox="allow-scripts allow-same-origin allow-popups"
-                          style={{ border: "none" }}
-                          height="500"
-                          width="100%"
-                          scrolling="no"
-                          title="Reddit Embed"
-                          className="rounded-lg bg-white"
-                        ></iframe>
+                      <div className="flex flex-col items-center p-2 sm:p-5 m-2">
+                        <blockquote className="reddit-embed-bq" data-embed-height="500">
+                          <a href={item.url.replace('embed.', 'www.').replace('?embed=true', '')}></a>
+                        </blockquote>
+                        <script async src="https://embed.reddit.com/widgets.js" charSet="UTF-8"></script>
                       </div>
                     )}
                     
