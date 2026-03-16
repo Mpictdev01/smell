@@ -74,8 +74,8 @@ export default function Home() {
       
       {/* SECTION 1: HERO */}
       <section className="w-full pt-12 pb-8 px-6">
-        <div className="max-w-[1240px] mx-auto mb-5">
-          <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">
+        <div className="max-w-[1240px] mx-auto mb-6 md:mb-8">
+          <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter">
             My dad finding out I drive to the gym, just to walk on a treadmill.
           </h2>
         </div>
