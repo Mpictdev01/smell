@@ -20,16 +20,8 @@ const items = [
   { id: 11, type: "x", tweetId: "2032733892734525549" },
 ];
 
-const categories = [
-  { id: "all", label: "All Categories" },
-  { id: "instagram", label: "Instagram" },
-  { id: "x", label: "Twitter / X" },
-  { id: "reddit", label: "Reddit" },
-];
-
 export default function Home() {
   const [mounted, setMounted] = useState(false);
-  const [activeCategory, setActiveCategory] = useState("all");
 
   useEffect(() => {
     // Simulate short loading to show skeleton state before real embeds load
@@ -38,11 +30,6 @@ export default function Home() {
     }, 800);
     return () => clearTimeout(timer);
   }, []);
-
-  // Filter items based on active category
-  const filteredItems = items.filter(
-    (item) => activeCategory === "all" || item.type === activeCategory
-  );
 
   const [memeText, setMemeText] = useState("");
   const memeRef = useRef<HTMLDivElement>(null);
@@ -89,15 +76,32 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SECTION 1.25: ABOUT */}
+      <section className="w-full px-6 py-12 md:py-16">
+        <div className="max-w-[800px] mx-auto bg-white rounded-3xl border border-gray-100 p-8 md:p-12 shadow-sm text-center">
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 mb-6">
+            About the Meme
+          </h2>
+          <div className="space-y-4 text-base md:text-lg text-gray-600 leading-relaxed font-medium">
+            <p>
+              The meme comes from the 2006 animated film Monster House, where the character’s strange expression and awkward energy have helped it regain virality across social media recently.
+            </p>
+            <p>
+              The character Reginald &ldquo;Skull&rdquo; Skulinski is a crew member at Pizza Freak, known for his awkward personality and the distinct look that has made him a popular reaction meme.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* SECTION 1.5: MEME GENERATOR */}
       <section className="w-full py-8 md:py-16 px-6 bg-gray-50 border-y border-gray-200">
         <div className="max-w-[1240px] mx-auto">
           
           <div className="mb-8 text-center">
             <h1 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter mb-4">
-              Make Your Own Dad
+              Make Your Own Meme
             </h1>
-            <p className="text-gray-500 font-medium">Create your custom meme, enter text and download.</p>
+            <p className="text-gray-500 font-medium">Enter your own text and download.</p>
           </div>
 
           <div className="flex flex-col md:flex-row items-start justify-center gap-10">
@@ -153,53 +157,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 2: 2-COLUMN LAYOUT (SIDEBAR & POSTS) */}
-      <section className="max-w-[1240px] mx-auto px-6 py-12 flex flex-col md:flex-row gap-10 md:gap-16">
-        
-        {/* COLUMN 1: SIDE HEADING & NAVIGATION */}
-        <aside className="w-full md:w-[240px] lg:w-[280px] flex-shrink-0">
-          <div className="md:sticky md:top-12">
-            <h2 className="text-2xl font-bold tracking-tight text-gray-900 mb-6 hidden md:block">
-              Explore
-            </h2>
-            
-            <p className="text-gray-500 font-medium mb-10 text-base leading-relaxed hidden md:block border-b border-gray-200 pb-8">
-              A curated collection of interesting internet fragments.
-            </p>
+      {/* SECTION 2: MASONRY POSTS */}
+      <section className="max-w-[1240px] mx-auto px-6 pb-16 pt-12">
 
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4">
-              Categories
-            </h3>
-
-            <nav className="flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-visible pb-4 md:pb-0 scrollbar-none">
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={`flex-shrink-0 text-left px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
-                    activeCategory === cat.id
-                      ? "bg-gray-900 text-white shadow-sm"
-                      : "text-gray-500 hover:bg-gray-100 hover:text-gray-900"
-                  }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
-            </nav>
-          </div>
-        </aside>
-
-        {/* COLUMN 2: POSTS COLLECTION */}
-        <main className="flex-1 w-full min-w-0">
-          <div className="mb-8 block md:hidden">
-             <p className="text-gray-500 text-sm border-b border-gray-200 pb-4">
-              Showing {mounted ? filteredItems.length : 0} posts in <b>{categories.find((c) => c.id === activeCategory)?.label}</b> category.
-            </p>
-          </div>
 
           {/* SKELETON LOADING STATE */}
           {!mounted ? (
-            <div className="columns-1 lg:columns-2 gap-6 space-y-6">
+            <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
               {[...Array(6)].map((_, i) => (
                 <div key={i} className="break-inside-avoid">
                   <div className="w-full bg-white rounded-2xl border border-gray-100 p-5 h-[420px] shadow-sm animate-pulse flex flex-col gap-5">
@@ -219,8 +183,8 @@ export default function Home() {
             </div>
           ) : (
             /* ACTUAL CONTENT (MASONRY) */
-            <div className="columns-1 lg:columns-2 gap-6 space-y-6">
-              {filteredItems.map((item) => (
+            <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+              {items.map((item) => (
                 <div key={item.id} className="break-inside-avoid">
                   <div className="group relative w-full overflow-hidden rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
                     
@@ -258,15 +222,14 @@ export default function Home() {
                 </div>
               ))}
 
-              {filteredItems.length === 0 && (
+              {items.length === 0 && (
                 <div className="text-center py-20 px-6 border-2 border-dashed border-gray-100 rounded-3xl">
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">Empty Category</h3>
-                  <p className="text-gray-500 text-sm">No links currently available in this category.</p>
+                  <h3 className="text-lg font-bold text-gray-900 mb-1">Empty Collection</h3>
+                  <p className="text-gray-500 text-sm">No links currently available.</p>
                 </div>
               )}
             </div>
           )}
-        </main>
       </section>
     </div>
   );
