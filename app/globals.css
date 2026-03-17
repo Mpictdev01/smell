@@ -21,11 +21,13 @@
 }
 
 body {
-  background: var(--background);
+  background-color: #ffffff;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+  background-size: 16px 16px;
+  background-position: 0 0;
 }
-
 .font-bubblebaz {
   font-family: var(--font-bubblebaz), sans-serif !important;
 }

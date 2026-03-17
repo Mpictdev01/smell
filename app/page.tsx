@@ -71,7 +71,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-[100dvh] bg-[#FAFAFA] text-gray-900 font-sans selection:bg-gray-200">
+    <div className="min-h-[100dvh] bg-transparent text-gray-900 font-sans selection:bg-gray-200">
       
       {/* SECTION 1: HERO */}
       <section className="w-full pt-12 pb-8 px-6">
@@ -157,7 +157,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 1.5: MEME GENERATOR */}
-      <section className="w-full py-8 md:py-16 px-6 bg-gray-50 border-y border-gray-200">
+      <section className="w-full py-8 md:py-16 px-6">
         <div className="max-w-[1240px] mx-auto">
           
           <div className="mb-8 text-center">
