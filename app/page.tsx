@@ -35,20 +35,7 @@ export default function Home() {
     }
   };
 
-  // Buy button URL generator
-  const getBuyUrl = () => {
-    if (!config || !config.buy_platform) return null;
-    let baseUrl = '';
-    if (config.buy_platform === 'pumpfun') {
-      baseUrl = 'https://pump.fun/coin/';
-    } else if (config.buy_platform === 'jup') {
-      baseUrl = 'https://jup.ag/swap/SOL-';
-    }
-    return config.contract_address ? `${baseUrl}${config.contract_address}` : null;
-  };
-
   const chartUrl = config?.dexscreener_url || null;
-  const buyUrl = getBuyUrl();
 
   useEffect(() => {
     // Simulate short loading to show skeleton state before real embeds load
@@ -89,8 +76,8 @@ export default function Home() {
       {/* SECTION 1: HERO */}
       <section className="w-full pt-12 pb-8 px-6">
         <div className="max-w-[1240px] mx-auto mb-6 md:mb-8">
-          <h2 className="text-4xl md:text-6xl font-bubblebaz text-gray-900 tracking-normal drop-shadow-sm font-normal">
-            My dad finding out I drive to the gym, just to walk on a treadmill.
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 tracking-tight leading-tight">
+            My dad when he finds out I didn't full port $SKULL
           </h2>
         </div>
         <div className="max-w-[1240px] mx-auto rounded-[2rem] overflow-hidden relative shadow-sm border border-gray-100 bg-white leading-none flex">
@@ -126,28 +113,23 @@ export default function Home() {
           </h3>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap">
             {config?.twitter_url && (
-              <a href={config.twitter_url} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto bg-gray-900 hover:bg-black text-white font-bold py-3.5 px-8 rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
-                Twitter
+              <a href={config.twitter_url} target="_blank" rel="noopener noreferrer" className="w-[60px] h-[60px] flex items-center justify-center bg-gray-900 hover:bg-black text-white rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
+                <img src="/social/x.avif" alt="Twitter/X" className="w-8 h-8 object-contain brightness-0 invert" />
               </a>
             )}
             {config?.community_url && (
-              <a href={config.community_url} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto bg-gray-900 hover:bg-black text-white font-bold py-3.5 px-8 rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
-                Community
+              <a href={config.community_url} target="_blank" rel="noopener noreferrer" className="w-[60px] h-[60px] flex items-center justify-center bg-gray-900 hover:bg-black text-white rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
+                <img src="/social/community.avif" alt="Community" className="w-8 h-8 object-contain brightness-0 invert" />
               </a>
             )}
             {config?.telegram_url && (
-              <a href={config.telegram_url} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto bg-gray-900 hover:bg-black text-white font-bold py-3.5 px-8 rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
-                Telegram
+              <a href={config.telegram_url} target="_blank" rel="noopener noreferrer" className="w-[60px] h-[60px] flex items-center justify-center bg-gray-900 hover:bg-black text-white rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
+                <img src="/social/community.avif" alt="Telegram" className="w-8 h-8 object-contain brightness-0 invert" />
               </a>
             )}
             {chartUrl && (
-              <a href={chartUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto bg-gray-900 hover:bg-black text-white font-bold py-3.5 px-8 rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
-                Chart
-              </a>
-            )}
-            {buyUrl && (
-              <a href={buyUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto bg-gray-900 hover:bg-black text-white font-bold py-3.5 px-8 rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
-                Buy
+              <a href={chartUrl} target="_blank" rel="noopener noreferrer" className="w-[60px] h-[60px] flex items-center justify-center bg-gray-900 hover:bg-black text-white rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
+                <img src="/social/dex.avif" alt="Chart" className="w-8 h-8 object-contain brightness-0 invert" />
               </a>
             )}
           </div>
@@ -182,7 +164,6 @@ export default function Home() {
             <h1 className="text-4xl md:text-6xl font-bubblebaz text-gray-900 tracking-normal mb-2 drop-shadow-sm font-normal">
               Make Your Own Meme
             </h1>
-            <p className="text-gray-500 font-medium tracking-wide">Enter your own text and download.</p>
           </div>
 
           <div className="flex flex-col md:flex-row items-start justify-center gap-10">
