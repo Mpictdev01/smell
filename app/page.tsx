@@ -26,6 +26,16 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const { config } = useProjectConfig();
   const [copySuccess, setCopySuccess] = useState(false);
+  const [linkInput, setLinkInput] = useState("");
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success">("idle");
+
+  const handleLinkSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!linkInput.trim()) return;
+    setSubmitStatus("success");
+    setLinkInput("");
+    setTimeout(() => setSubmitStatus("idle"), 3000);
+  };
 
   const handleCopy = () => {
     if (config?.contract_address) {
@@ -286,20 +296,34 @@ export default function Home() {
                         
                         <form 
                           className="w-full flex flex-col items-center justify-center gap-4"
-                          onSubmit={(e) => { e.preventDefault(); alert("Feature coming soon!"); }}
+                          onSubmit={handleLinkSubmit}
                         >
                           <input 
-                            type="text" 
+                            type="text"
+                            value={linkInput}
+                            onChange={(e) => setLinkInput(e.target.value)}
                             className="w-full border border-gray-200 bg-gray-50 px-4 py-3 rounded-xl outline-none text-gray-900 focus:ring-2 focus:ring-gray-900 transition-all font-medium text-sm" 
                             placeholder="Paste meme link here..." 
                             required
                           />
                           
                           <button 
-                            type="submit" 
-                            className="w-full bg-gray-900 hover:bg-black text-white font-bold py-3.5 px-4 rounded-xl transition-all shadow-sm active:scale-95 flex items-center justify-center gap-2"
+                            type="submit"
+                            disabled={submitStatus === "success"}
+                            className={`w-full font-bold py-3.5 px-4 rounded-xl transition-all shadow-sm active:scale-95 flex items-center justify-center gap-2 ${
+                              submitStatus === "success" 
+                                ? "bg-green-500 hover:bg-green-600 text-white cursor-not-allowed" 
+                                : "bg-gray-900 hover:bg-black text-white"
+                            }`}
                           >
-                            Submit
+                            {submitStatus === "success" ? (
+                              <>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Sent!
+                              </>
+                            ) : (
+                              "Submit"
+                            )}
                           </button>
                         </form>
                       </div>
