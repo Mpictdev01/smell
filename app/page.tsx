@@ -25,6 +25,15 @@ const items = [
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const { config } = useProjectConfig();
+  const [copySuccess, setCopySuccess] = useState(false);
+
+  const handleCopy = () => {
+    if (config?.contract_address) {
+      navigator.clipboard.writeText(config.contract_address);
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 2000);
+    }
+  };
 
   // Buy button URL generator
   const getBuyUrl = () => {
@@ -144,12 +153,23 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="max-w-[800px] mx-auto text-center">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 bg-white border border-gray-100 rounded-2xl px-6 py-5 shadow-sm w-full">
-             <span className="font-bubblebaz text-gray-900 text-2xl tracking-normal font-normal">CA:</span>
-             <code className="text-gray-600 font-mono text-sm md:text-base break-all bg-gray-50 px-4 py-3 rounded-xl border border-gray-100 w-full sm:flex-1 text-center sm:text-left select-all cursor-text">
+        <div className="max-w-[500px] mx-auto text-center mt-8 px-4">
+          <div 
+            onClick={handleCopy}
+            title={copySuccess ? "Copied!" : "Copy CA"}
+            className="flex flex-row items-center justify-between gap-3 bg-white border-2 border-gray-100 rounded-full px-5 py-3 shadow-sm w-full mx-auto cursor-pointer hover:border-gray-200 transition-all hover:shadow-md active:scale-[0.98] group"
+          >
+             <span className="font-bubblebaz text-gray-900 text-xl tracking-normal font-normal">CA:</span>
+             <code className="text-gray-600 font-mono text-sm sm:text-base truncate flex-1 text-center bg-transparent select-none">
                {config?.contract_address || "(Contract Address Coming Soon)"}
              </code>
+             <button aria-label="Copy CA" className="text-gray-400 group-hover:text-gray-900 transition-colors p-1">
+                {copySuccess ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-green-500"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                )}
+             </button>
           </div>
         </div>
       </section>
