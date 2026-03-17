@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
+
+const bubblebaz = localFont({
+  src: "../public/fonts/bubblebaz/bubblebaz.ttf",
+  variable: "--font-bubblebaz",
+  weight: "400",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,6 +22,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Skull",
   description: "A collection of internet moments, relatable memes (me_irl), and curated funny posts from X, Instagram, and Reddit.",
+  icons: {
+    icon: [
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+  },
   openGraph: {
     title: "Skull",
     description: "A collection of internet moments, relatable memes (me_irl), and curated funny posts from X, Instagram, and Reddit.",
@@ -43,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${bubblebaz.variable} antialiased`}
       >
         {children}
       </body>

@@ -4,12 +4,14 @@ import { useEffect, useState, useRef } from "react";
 import { Tweet } from "react-tweet";
 import { InstagramEmbed } from "react-social-media-embed";
 import { toPng } from "html-to-image";
+import { useProjectConfig } from "@/lib/useProjectConfig";
 
 // Link collection data
 const items = [
   { id: 1, type: "instagram", url: "https://www.instagram.com/p/DV0-DHIE-hD/" },
   { id: 2, type: "x", tweetId: "2032058298128531804" },
   { id: 3, type: "x", tweetId: "2032796518835777874" },
+  { id: "submit_form", type: "submit_form" },
   { id: 4, type: "instagram", url: "https://www.instagram.com/p/DVhxZ7qEf4t/" },
   { id: 5, type: "x", tweetId: "2030213333589123269" },
   { id: 6, type: "reddit", url: "https://embed.reddit.com/r/me_irl/comments/1p1fzf5/me_irl/?embed=true" },
@@ -22,6 +24,22 @@ const items = [
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
+  const { config } = useProjectConfig();
+
+  // Buy button URL generator
+  const getBuyUrl = () => {
+    if (!config || !config.buy_platform) return null;
+    let baseUrl = '';
+    if (config.buy_platform === 'pumpfun') {
+      baseUrl = 'https://pump.fun/coin/';
+    } else if (config.buy_platform === 'jup') {
+      baseUrl = 'https://jup.ag/swap/SOL-';
+    }
+    return config.contract_address ? `${baseUrl}${config.contract_address}` : null;
+  };
+
+  const chartUrl = config?.dexscreener_url || null;
+  const buyUrl = getBuyUrl();
 
   useEffect(() => {
     // Simulate short loading to show skeleton state before real embeds load
@@ -62,7 +80,7 @@ export default function Home() {
       {/* SECTION 1: HERO */}
       <section className="w-full pt-12 pb-8 px-6">
         <div className="max-w-[1240px] mx-auto mb-6 md:mb-8">
-          <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter">
+          <h2 className="text-4xl md:text-6xl font-bubblebaz text-gray-900 tracking-normal drop-shadow-sm font-normal">
             My dad finding out I drive to the gym, just to walk on a treadmill.
           </h2>
         </div>
@@ -78,17 +96,60 @@ export default function Home() {
 
       {/* SECTION 1.25: ABOUT */}
       <section className="w-full px-6 py-12 md:py-16">
-        <div className="max-w-[800px] mx-auto bg-white rounded-3xl border border-gray-100 p-8 md:p-12 shadow-sm text-center">
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 mb-6">
-            About the Meme
+        <div className="max-w-[800px] mx-auto mb-8 text-center">
+          <h2 className="text-4xl md:text-5xl font-bubblebaz text-gray-900 tracking-normal drop-shadow-sm font-normal">
+            ABOUT
           </h2>
-          <div className="space-y-4 text-base md:text-lg text-gray-600 leading-relaxed font-medium">
+        </div>
+        
+        <div className="max-w-[800px] mx-auto text-center mb-8">
+          <div className="space-y-4 text-base md:text-lg text-gray-600 leading-relaxed font-medium mb-12">
             <p>
               The meme comes from the 2006 animated film Monster House, where the character’s strange expression and awkward energy have helped it regain virality across social media recently.
             </p>
             <p>
               The character Reginald &ldquo;Skull&rdquo; Skulinski is a crew member at Pizza Freak, known for his awkward personality and the distinct look that has made him a popular reaction meme.
             </p>
+          </div>
+          
+          <h3 className="text-3xl font-bubblebaz text-gray-900 tracking-normal mb-6 drop-shadow-sm font-normal">
+            SOCIALS
+          </h3>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap">
+            {config?.twitter_url && (
+              <a href={config.twitter_url} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto bg-gray-900 hover:bg-black text-white font-bold py-3.5 px-8 rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
+                Twitter
+              </a>
+            )}
+            {config?.community_url && (
+              <a href={config.community_url} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto bg-gray-900 hover:bg-black text-white font-bold py-3.5 px-8 rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
+                Community
+              </a>
+            )}
+            {config?.telegram_url && (
+              <a href={config.telegram_url} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto bg-gray-900 hover:bg-black text-white font-bold py-3.5 px-8 rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
+                Telegram
+              </a>
+            )}
+            {chartUrl && (
+              <a href={chartUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto bg-gray-900 hover:bg-black text-white font-bold py-3.5 px-8 rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
+                Chart
+              </a>
+            )}
+            {buyUrl && (
+              <a href={buyUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto bg-gray-900 hover:bg-black text-white font-bold py-3.5 px-8 rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
+                Buy
+              </a>
+            )}
+          </div>
+        </div>
+
+        <div className="max-w-[800px] mx-auto text-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 bg-white border border-gray-100 rounded-2xl px-6 py-5 shadow-sm w-full">
+             <span className="font-bubblebaz text-gray-900 text-2xl tracking-normal font-normal">CA:</span>
+             <code className="text-gray-600 font-mono text-sm md:text-base break-all bg-gray-50 px-4 py-3 rounded-xl border border-gray-100 w-full sm:flex-1 text-center sm:text-left select-all cursor-text">
+               {config?.contract_address || "(Contract Address Coming Soon)"}
+             </code>
           </div>
         </div>
       </section>
@@ -98,10 +159,10 @@ export default function Home() {
         <div className="max-w-[1240px] mx-auto">
           
           <div className="mb-8 text-center">
-            <h1 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter mb-4">
+            <h1 className="text-4xl md:text-6xl font-bubblebaz text-gray-900 tracking-normal mb-2 drop-shadow-sm font-normal">
               Make Your Own Meme
             </h1>
-            <p className="text-gray-500 font-medium">Enter your own text and download.</p>
+            <p className="text-gray-500 font-medium tracking-wide">Enter your own text and download.</p>
           </div>
 
           <div className="flex flex-col md:flex-row items-start justify-center gap-10">
@@ -215,6 +276,33 @@ export default function Home() {
                           title="Reddit Embed"
                           className="rounded-lg bg-white"
                         ></iframe>
+                      </div>
+                    )}
+                    
+                    {item.type === "submit_form" && (
+                      <div className="w-full h-full p-8 flex flex-col justify-center items-center bg-white border border-gray-100 rounded-2xl min-h-[300px] text-center shadow-sm">
+                        <h3 className="text-2xl font-bubblebaz text-gray-900 tracking-normal mb-6 w-full">
+                          Did we miss one?
+                        </h3>
+                        
+                        <form 
+                          className="w-full flex flex-col items-center justify-center gap-4"
+                          onSubmit={(e) => { e.preventDefault(); alert("Feature coming soon!"); }}
+                        >
+                          <input 
+                            type="text" 
+                            className="w-full border border-gray-200 bg-gray-50 px-4 py-3 rounded-xl outline-none text-gray-900 focus:ring-2 focus:ring-gray-900 transition-all font-medium text-sm" 
+                            placeholder="Paste meme link here..." 
+                            required
+                          />
+                          
+                          <button 
+                            type="submit" 
+                            className="w-full bg-gray-900 hover:bg-black text-white font-bold py-3.5 px-4 rounded-xl transition-all shadow-sm active:scale-95 flex items-center justify-center gap-2"
+                          >
+                            Submit
+                          </button>
+                        </form>
                       </div>
                     )}
                     
