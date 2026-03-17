@@ -175,7 +175,7 @@ export default function Home() {
                 className="w-full bg-white flex flex-col p-4 border border-gray-100 shadow-sm"
               >
                 <div className="text-xl md:text-2xl font-medium text-gray-900 leading-snug mb-4 whitespace-pre-wrap break-words min-h-[4rem]">
-                  {memeText || "When you say \"I'll be there in 5\" and they say \"I see your location\""}
+                  {memeText || "When you sold the bottom on $SKULL instead of buying more"}
                 </div>
                 <div className="w-full rounded-[14px] overflow-hidden relative leading-none flex">
                   <img 
@@ -192,9 +192,7 @@ export default function Home() {
             {/* CONTROLS */}
             <div className="w-full md:w-[320px] bg-white p-6 rounded-3xl border border-gray-200 shadow-sm flex flex-col gap-5 sticky top-12">
               <div>
-                <label className="block text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">
-                  Top Text
-                </label>
+
                 <textarea 
                   className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-base rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all min-h-[120px] resize-none"
                   placeholder="Enter your custom meme caption here..."
