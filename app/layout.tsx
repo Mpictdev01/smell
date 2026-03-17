@@ -20,6 +20,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://theskullmeme.wtf/"),
   title: "Skull",
   description: "A collection of internet moments, relatable memes (me_irl), and curated funny posts from X, Instagram, and Reddit.",
   icons: {
@@ -32,6 +33,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Skull",
     description: "A collection of internet moments, relatable memes (me_irl), and curated funny posts from X, Instagram, and Reddit.",
+    url: "https://theskullmeme.wtf/",
+    siteName: "Skull Meme",
     images: [
       {
         url: "/Og.jpg",
