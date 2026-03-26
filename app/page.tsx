@@ -533,10 +533,10 @@ export default function Home() {
                           src={`https://dexscreener.com/solana/${config.contract_address}?embed=1&theme=dark&trades=0&info=0&chart=1`} 
                           className="absolute border-none"
                           style={{ 
-                            top: '-82px', 
-                            left: '-62px', 
-                            width: 'calc(100% + 82px)', 
-                            height: 'calc(100% + 100px)',
+                            top: '-48px', 
+                            left: '0', 
+                            width: '100%', 
+                            height: 'calc(100% + 48px)',
                             maxWidth: 'none'
                           }}
                           title="DexScreener Chart"
