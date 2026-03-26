@@ -20,6 +20,30 @@
   }
 }
 
+/* Claymorphism Utilities */
+@layer utilities {
+  .shadow-clay {
+    box-shadow: 
+      8px 8px 20px rgba(0, 0, 0, 0.08),
+      inset -6px -6px 12px rgba(0, 0, 0, 0.05),
+      inset 6px 6px 12px rgba(255, 255, 255, 0.6);
+  }
+  
+  .shadow-clay-yellow {
+    box-shadow: 
+      4px 4px 10px rgba(0, 0, 0, 0.1),
+      inset -4px -4px 8px rgba(0, 0, 0, 0.15),
+      inset 4px 4px 8px rgba(255, 255, 255, 0.4);
+  }
+
+  .shadow-clay-white {
+    box-shadow: 
+      6px 6px 15px rgba(0, 0, 0, 0.05),
+      inset -4px -4px 10px rgba(0, 0, 0, 0.08),
+      inset 4px 4px 10px rgba(255, 255, 255, 0.9);
+  }
+}
+
 body {
   background-color: #ffffff;
   color: var(--foreground);

@@ -213,14 +213,14 @@ export default function Home() {
     <div className="min-h-[100dvh] bg-transparent text-gray-900 font-sans selection:bg-gray-200">
       
       {/* NAVBAR */}
-      <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-4 px-6 py-2 bg-[#FFD700] border-[4px] border-gray-900 shadow-[4px_4px_0px_#000] rounded-2xl">
-        <a href="#" className="font-bubblebaz text-xl tracking-wider text-gray-900 hover:scale-105 transition-all px-2">HOME</a>
-        <a href="#about" className="font-bubblebaz text-xl tracking-wider text-gray-900 hover:scale-105 transition-all px-2">ABOUT</a>
+      <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-4 px-6 py-2 bg-[#FFD700] shadow-clay-yellow rounded-2xl border-none">
+        <a href="#" className="font-bubblebaz text-xl tracking-wider text-gray-900 hover:scale-105 transition-all px-2 uppercase">HOME</a>
+        <a href="#about" className="font-bubblebaz text-xl tracking-wider text-gray-900 hover:scale-105 transition-all px-2 uppercase">ABOUT</a>
         <a 
           href={buyUrl || "#"} 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="font-bubblebaz text-xl tracking-wider text-gray-900 hover:scale-105 transition-all px-2"
+          className="font-bubblebaz text-xl tracking-wider text-gray-900 hover:scale-105 transition-all px-2 uppercase"
         >
           BUY
         </a>
@@ -259,7 +259,7 @@ export default function Home() {
                   href={config?.twitter_url || "#"} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="w-14 h-14 flex items-center justify-center bg-[#FFD700] border-[4px] border-gray-900 shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-2xl hover:bg-[#F2C900] hover:translate-x-[2px] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
+                  className="w-14 h-14 flex items-center justify-center bg-[#FFD700] shadow-clay-yellow rounded-2xl hover:bg-[#F2C900] hover:scale-110 active:scale-95 transition-all"
                 >
                   <img src="/social/x.avif" alt="X/Twitter" className="w-8 h-8 object-contain brightness-0" />
                 </a>
@@ -269,7 +269,7 @@ export default function Home() {
                   href={config?.telegram_url || config?.community_url || "#"} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="w-14 h-14 flex items-center justify-center bg-[#FFD700] border-[4px] border-gray-900 shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-2xl hover:bg-[#F2C900] hover:translate-x-[2px] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
+                  className="w-14 h-14 flex items-center justify-center bg-[#FFD700] shadow-clay-yellow rounded-2xl hover:bg-[#F2C900] hover:scale-110 active:scale-95 transition-all"
                 >
                   <img src="/social/community.avif" alt="Community" className="w-8 h-8 object-contain brightness-0" />
                 </a>
@@ -279,7 +279,7 @@ export default function Home() {
                   href={chartUrl || "#"} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="w-14 h-14 flex items-center justify-center bg-[#FFD700] border-[4px] border-gray-900 shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-2xl hover:bg-[#F2C900] hover:translate-x-[2px] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
+                  className="w-14 h-14 flex items-center justify-center bg-[#FFD700] shadow-clay-yellow rounded-2xl hover:bg-[#F2C900] hover:scale-110 active:scale-95 transition-all"
                 >
                   <img src="/social/dex.avif" alt="Eagle/Dex" className="w-8 h-8 object-contain brightness-0" />
                 </a>
@@ -289,7 +289,7 @@ export default function Home() {
                 <div 
                   onClick={handleCopy}
                   title={copySuccess ? "Copied!" : "Copy CA"}
-                  className="flex flex-row items-center justify-between gap-3 bg-white border-2 border-gray-100 rounded-full px-5 py-3 shadow-sm w-full mx-auto cursor-pointer hover:border-gray-200 transition-all hover:shadow-md active:scale-[0.98] group"
+                  className="flex flex-row items-center justify-between gap-3 bg-white shadow-clay-white rounded-full px-5 py-3 w-full mx-auto cursor-pointer hover:scale-[1.02] transition-all active:scale-[0.98] group"
                 >
                   <span className="font-bubblebaz text-gray-900 text-xl tracking-normal font-normal">CA:</span>
                   <code className="text-gray-600 font-mono text-sm sm:text-base truncate flex-1 text-center bg-transparent select-none">
@@ -328,13 +328,13 @@ export default function Home() {
         {/* SECTION 1.25: ABOUT / JOIN COMMUNITY */}
         <section id="about" className="w-full relative z-10 px-6 pt-12">
           <div className="max-w-[1240px] mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bubblebaz text-gray-900 tracking-normal font-normal mb-10">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bubblebaz text-gray-900 tracking-normal font-normal mb-8 uppercase">
               Join To Community
             </h2>
             
             {/* NEW ABOUT IMAGE */}
             <div className="max-w-[1000px] mx-auto mb-12">
-              <div className="relative rounded-[2rem] md:rounded-[3rem] overflow-hidden border-[6px] border-gray-900 shadow-[10px_10px_0px_#000]">
+              <div className="relative rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden shadow-clay border-none">
                 <Image 
                   src="/aboout.avif" 
                   alt="Join Community"
@@ -348,12 +348,25 @@ export default function Home() {
           </div>
         </section>
 
+        {/* SECTION 1.5: ABOUT DETAILS (SIMPLIFIED) */}
+        <section id="about-details" className="w-full relative z-30 px-6 py-8">
+          <div className="max-w-[800px] mx-auto text-center">
+            <h2 className="text-4xl md:text-5xl font-bubblebaz text-gray-900 mb-6 uppercase">
+              WHAT IS $TOMODACHI?
+            </h2>
+            <p className="text-xl md:text-2xl font-bubblebaz text-gray-700 leading-relaxed tracking-wide">
+              Experience the nostalgic "waku waku" life with Tomodachi Collection. A community dedicated to the quirky lives and internet moments of Miis on the island. 
+              We bring back the fun, the chaos, and the memories of your favorite childhood island life, now on the Solana blockchain.
+            </p>
+          </div>
+        </section>
+
         {/* SECTION 2: TWITTER X SLIDER (MOVED UP) */}
         <section className="w-full px-4 md:px-8 pb-16 pt-8 relative z-30 flex justify-center">
           <div className="max-w-[1400px] w-full">
             {/* Title */}
-            <div className="max-w-[1240px] mx-auto text-center mb-10">
-              <h2 className="text-4xl md:text-5xl font-bubblebaz text-gray-900 tracking-normal font-normal">
+            <div className="max-w-[1240px] mx-auto text-center mb-8">
+              <h2 className="text-4xl md:text-5xl font-bubblebaz text-gray-900 tracking-normal font-normal uppercase">
                 COMMUNITY X
               </h2>
             </div>
@@ -364,7 +377,7 @@ export default function Home() {
               {/* PREV BUTTON (Visible on LG screens) */}
               <button 
                 onClick={slideLeft}
-                className="hidden lg:flex flex-shrink-0 w-14 h-14 items-center justify-center bg-[#FFD700] border-[4px] border-gray-900 shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-full hover:bg-[#F2C900] hover:translate-x-[-2px] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all z-40 relative group/btn"
+                className="hidden lg:flex flex-shrink-0 w-14 h-14 items-center justify-center bg-[#FFD700] shadow-clay-yellow rounded-full hover:bg-[#F2C900] hover:scale-110 active:scale-95 transition-all z-40 relative group/btn border-none"
                 aria-label="Previous"
               >
                 <svg fill="none" stroke="currentColor" strokeWidth="3.5" viewBox="0 0 24 24" className="w-5 h-5 text-gray-900 group-hover/btn:-translate-x-0.5 transition-transform"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"></path></svg>
@@ -417,12 +430,14 @@ export default function Home() {
                       {displayTweetIds.map((id, index) => (
                         <motion.div 
                           key={`${id}-${index}`} 
-                          className="w-[85vw] md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-4rem)/3)] max-w-full flex-shrink-0 rounded-[2rem] shadow-[6px_6px_0px_rgba(0,0,0,1)] border-[4px] border-gray-900 p-4 md:p-6 flex flex-col items-center justify-start bg-[length:100%_100%] bg-no-repeat h-[550px]"
+                          className="w-[85vw] md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-4rem)/3)] max-w-full flex-shrink-0 rounded-[2.5rem] shadow-clay border-none p-5 md:p-8 flex flex-col items-center justify-center bg-[length:100%_100%] bg-no-repeat h-[620px] lg:h-[650px]"
                           style={{ backgroundImage: "url('/fframe-x.png')" }}
                         >
-                          <div className="w-full h-full pointer-events-none sm:pointer-events-auto select-none overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] flex justify-center items-start pb-8 pt-2">
+                          <div className="w-full h-full pointer-events-none sm:pointer-events-auto select-none overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] flex justify-center items-center">
                             <div className="w-full mx-auto max-w-[500px]">
-                              <Tweet id={id} />
+                              <div className="rounded-[1.5rem] overflow-hidden shadow-2xl bg-black">
+                                <Tweet id={id} />
+                              </div>
                             </div>
                           </div>
                         </motion.div>
@@ -435,7 +450,7 @@ export default function Home() {
               {/* NEXT BUTTON */}
               <button 
                 onClick={slideRight}
-                className="hidden lg:flex flex-shrink-0 w-14 h-14 items-center justify-center bg-[#FFD700] border-[4px] border-gray-900 shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-full hover:bg-[#F2C900] hover:translate-x-[2px] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all z-40 relative group/btn"
+                className="hidden lg:flex flex-shrink-0 w-14 h-14 items-center justify-center bg-[#FFD700] shadow-clay-yellow rounded-full hover:bg-[#F2C900] hover:scale-110 active:scale-95 transition-all z-40 relative group/btn border-none"
                 aria-label="Next"
               >
                 <svg fill="none" stroke="currentColor" strokeWidth="3.5" viewBox="0 0 24 24" className="w-5 h-5 text-gray-900 group-hover/btn:translate-x-0.5 transition-transform"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"></path></svg>
@@ -449,8 +464,8 @@ export default function Home() {
         <section id="buy" className="w-full px-6 pb-32 pt-16 relative z-10 flex flex-col items-center overflow-hidden">
           <div className="max-w-[1240px] w-full mx-auto">
             {/* Title with matching style */}
-            <div className="text-center mb-16 px-4">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bubblebaz text-gray-900 tracking-normal font-normal">
+            <div className="text-center mb-8 px-4">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bubblebaz text-gray-900 tracking-normal font-normal uppercase">
                 JUP.SWAP
               </h2>
             </div>
@@ -461,23 +476,27 @@ export default function Home() {
               {/* JUPITER SWAP WIDGET */}
               <div className="xl:col-span-12 lg:xl:col-span-5 flex flex-col">
                 <div 
-                  className="border-[4px] border-gray-900 shadow-[6px_6px_0px_#000] rounded-[2rem] p-6 md:p-10 bg-[length:100%_100%] bg-no-repeat h-full flex flex-col overflow-hidden min-h-[650px] lg:min-h-[700px]"
+                  className="shadow-clay rounded-[2.5rem] p-5 md:p-8 bg-[length:100%_100%] bg-no-repeat h-full flex flex-col overflow-hidden border-none min-h-[650px] lg:min-h-[700px]"
                   style={{ backgroundImage: "url('/fframe-x.png')" }}
                 >
-                  <h3 className="text-3xl font-bubblebaz text-gray-900 mb-8 text-center tracking-wider">SWAP $TOMODACHI</h3>
-                  <div className="flex-1 w-full relative rounded-2xl overflow-hidden bg-white/40 backdrop-blur-sm border-2 border-gray-900/10">
-                    <div id="jupiter-terminal" className="w-full h-full min-h-[500px]" />
+                  <div className="pt-2 pb-4">
+                    <h3 className="text-2xl md:text-3xl font-bubblebaz text-gray-900 text-center tracking-wider uppercase">SWAP $TOMODACHI</h3>
+                  </div>
+                  <div className="flex-1 w-full relative rounded-[1.5rem] overflow-hidden bg-black shadow-inner">
+                    <div id="jupiter-terminal" className="absolute inset-0 w-full h-full" />
                   </div>
                 </div>
               </div>
               {/* DEXSCREENER CHART */}
               <div className="xl:col-span-12 lg:xl:col-span-7 flex flex-col">
                 <div 
-                  className="border-[4px] border-gray-900 shadow-[6px_6px_0px_#000] rounded-[2rem] p-6 md:p-10 bg-[length:100%_100%] bg-no-repeat h-full flex flex-col overflow-hidden min-h-[650px] lg:min-h-[700px]"
+                  className="shadow-clay rounded-[2.5rem] p-5 md:p-8 bg-[length:100%_100%] bg-no-repeat h-full flex flex-col overflow-hidden border-none min-h-[650px] lg:min-h-[700px]"
                   style={{ backgroundImage: "url('/fframe-x.png')" }}
                 >
-                  <h3 className="text-3xl font-bubblebaz text-gray-900 mb-8 text-center tracking-wider">LIVE CHART</h3>
-                  <div className="flex-1 w-full relative rounded-2xl overflow-hidden bg-white/40 backdrop-blur-sm border-2 border-gray-900/10">
+                  <div className="pt-2 pb-4">
+                    <h3 className="text-2xl md:text-3xl font-bubblebaz text-gray-900 text-center tracking-wider uppercase">LIVE CHART</h3>
+                  </div>
+                  <div className="flex-1 w-full relative rounded-[1.5rem] overflow-hidden bg-black shadow-inner">
                     {config?.contract_address ? (
                       <div className="absolute inset-0 overflow-hidden bg-[#131722]">
                         <iframe 
@@ -512,12 +531,12 @@ export default function Home() {
       {/* FLOATING AUDIO BUTTON */}
       <button
         onClick={togglePlay}
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 md:w-20 md:h-20 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all cursor-pointer flex items-center justify-center hover:bg-white/10"
+        className="fixed bottom-6 right-6 z-50 w-16 h-16 md:w-20 md:h-20 rounded-full shadow-clay-yellow bg-[#FFD700] hover:scale-110 active:scale-95 transition-all cursor-pointer flex items-center justify-center border-none"
       >
         <img 
           src={isPlaying ? "/button/stop.png" : "/button/play.png"} 
           alt={isPlaying ? "Stop Music" : "Play Music"} 
-          className="w-full h-full object-contain drop-shadow-lg" 
+          className="w-full h-full object-contain p-2" 
         />
       </button>
       <audio ref={audioRef} src="/music-bg.mp3" loop />
