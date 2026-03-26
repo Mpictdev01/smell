@@ -5,6 +5,9 @@ import { Tweet } from "react-tweet";
 import { InstagramEmbed } from "react-social-media-embed";
 import { toPng } from "html-to-image";
 import { useProjectConfig } from "@/lib/useProjectConfig";
+import Image from "next/image";
+import bgImg from "../public/bg.avif";
+import logoImg from "../public/logo.avif";
 
 // Link collection data
 const items = [
@@ -24,10 +27,23 @@ const items = [
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
-  const { config } = useProjectConfig();
+  const { config, loading } = useProjectConfig();
   const [copySuccess, setCopySuccess] = useState(false);
   const [linkInput, setLinkInput] = useState("");
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success">("idle");
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  const togglePlay = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   const handleLinkSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,6 +62,19 @@ export default function Home() {
   };
 
   const chartUrl = config?.dexscreener_url || null;
+
+  const getBuyUrl = () => {
+    if (!config?.buy_platform) return null;
+    let baseUrl = '';
+    if (config.buy_platform === 'pumpfun') {
+      baseUrl = 'https://pump.fun/coin/';
+    } else if (config.buy_platform === 'jup') {
+      baseUrl = 'https://jup.ag/swap/SOL-';
+    }
+    return config.contract_address ? `${baseUrl}${config.contract_address}` : null;
+  };
+
+  const buyUrl = getBuyUrl();
 
   useEffect(() => {
     // Simulate short loading to show skeleton state before real embeds load
@@ -83,25 +112,49 @@ export default function Home() {
   return (
     <div className="min-h-[100dvh] bg-transparent text-gray-900 font-sans selection:bg-gray-200">
       
-      {/* SECTION 1: HERO */}
-      <section className="w-full pt-12 pb-8 px-6">
-        <div className="max-w-[1240px] mx-auto mb-6 md:mb-8">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 tracking-tight leading-tight">
-            My dad when he finds out I didn't full port $SKULL
-          </h2>
-        </div>
-        <div className="max-w-[1240px] mx-auto rounded-[2rem] overflow-hidden relative shadow-sm border border-gray-100 bg-white leading-none flex">
-          <img 
-            src="/hero.avif" 
-            alt="Skull hero banner"
-            className="w-full h-auto block"
-          />
-          <div className="absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-gray-900/10 pointer-events-none"></div>
-        </div>
-      </section>
+      {/* MAIN OVERLAP CONTAINER */}
+      <div className="relative w-full">
 
-      {/* SECTION 1.25: ABOUT */}
-      <section className="w-full px-6 py-12 md:py-16">
+        {/* SECTION 1: HERO LAYER */}
+        <section className="relative w-full z-10 pointer-events-none">
+          
+          {/* HERO BACKGROUND (No masking needed here. Staying solid ensures no empty space behind the fade) */}
+          <div>
+            <Image 
+              src={bgImg} 
+              alt="Hero Background"
+              className="w-full h-auto block"
+              priority
+              unoptimized
+            />
+          </div>
+          
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <Image 
+              src={logoImg} 
+              alt="Logo"
+              className="w-[70%] sm:w-[60%] md:w-[50%] lg:w-[40%] max-w-[800px] h-auto object-contain drop-shadow-2xl"
+              priority
+              unoptimized
+            />
+          </div>
+        </section>
+
+        {/* PAGE 3 CONTENT LAYER */}
+        <div className="relative w-full z-20 -mt-[20vw] pt-[22vw]">
+          
+          {/* PAGE 3 BACKGROUND LAYER (Masked exactly the top 20vw) */}
+          <div 
+            className="absolute inset-0 w-full h-full bg-cover bg-top z-[-1]" 
+            style={{ 
+              backgroundImage: "url('/page3.avif')",
+              maskImage: "linear-gradient(to bottom, rgba(0,0,0,0) 0vw, rgba(0,0,0,1) 20vw, rgba(0,0,0,1) 100%)",
+              WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,0) 0vw, rgba(0,0,0,1) 20vw, rgba(0,0,0,1) 100%)"
+            }}
+          ></div>
+
+        {/* SECTION 1.25: ABOUT */}
+        <section className="w-full relative z-10 px-6 pb-12 md:pb-16">
         <div className="max-w-[800px] mx-auto mb-8 text-center">
           <h2 className="text-4xl md:text-5xl font-bubblebaz text-gray-900 tracking-normal drop-shadow-sm font-normal">
             ABOUT
@@ -142,6 +195,11 @@ export default function Home() {
                 <img src="/social/dex.avif" alt="Chart" className="w-8 h-8 object-contain brightness-0 invert" />
               </a>
             )}
+            {buyUrl && (
+              <a href={buyUrl} target="_blank" rel="noopener noreferrer" className="h-[60px] px-6 font-bubblebaz tracking-widest text-2xl flex items-center justify-center bg-[#FFD700] hover:bg-[#F2C900] text-black rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
+                BUY
+              </a>
+            )}
           </div>
         </div>
 
@@ -153,7 +211,7 @@ export default function Home() {
           >
              <span className="font-bubblebaz text-gray-900 text-xl tracking-normal font-normal">CA:</span>
              <code className="text-gray-600 font-mono text-sm sm:text-base truncate flex-1 text-center bg-transparent select-none">
-               {config?.contract_address || "(Contract Address Coming Soon)"}
+               {config?.contract_address || "Coming Soon"}
              </code>
              <button aria-label="Copy CA" className="text-gray-400 group-hover:text-gray-900 transition-colors p-1">
                 {copySuccess ? (
@@ -342,6 +400,23 @@ export default function Home() {
             </div>
           )}
       </section>
+      
+      </div> {/* END OF PAGE 3 CONTENT LAYER */}
+      </div> {/* END OF MAIN OVERLAP CONTAINER */}
+
+      {/* FLOATING AUDIO BUTTON */}
+      <button
+        onClick={togglePlay}
+        className="fixed bottom-6 right-6 z-50 w-16 h-16 md:w-20 md:h-20 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all cursor-pointer flex items-center justify-center hover:bg-white/10"
+      >
+        <img 
+          src={isPlaying ? "/button/stop.png" : "/button/play.png"} 
+          alt={isPlaying ? "Stop Music" : "Play Music"} 
+          className="w-full h-full object-contain drop-shadow-lg" 
+        />
+      </button>
+      <audio ref={audioRef} src="/music-bg.mp3" loop />
+
     </div>
   );
 }
