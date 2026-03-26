@@ -6,7 +6,8 @@ import { useProjectConfig } from "@/lib/useProjectConfig";
 import Image from "next/image";
 import Script from "next/script";
 import { motion, useAnimation, useMotionValue } from "framer-motion";
-import bgImg from "../public/bg1.avif";
+import heroBgStatic from "../public/bg1.avif";
+import islandBgStatic from "../public/page3.avif";
 import logoImg from "../public/logo.avif";
 
 // New X (Twitter) Link collection data
@@ -226,23 +227,54 @@ export default function Home() {
 
       <div className="relative w-full">
         {/* SECTION 1: HERO LAYER */}
-        <section className="relative w-full">
+        <section className="relative w-full min-h-[115vh] overflow-hidden bg-[#B0E0E6]">
           
-          {/* HERO BACKGROUND (No masking needed here. Staying solid ensures no empty space behind the fade) */}
-          <div className="relative z-10">
+          {/* HERO BACKGROUND */}
+          <div 
+            className="absolute inset-x-0 top-0 h-[115vh] z-10 leading-[0]"
+            style={{ 
+              maskImage: 'linear-gradient(to bottom, black 105vh, transparent 115vh)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 105vh, transparent 115vh)'
+            }}
+          >
             <Image 
-              src={bgImg} 
+              src="/bg1.avif" 
               alt="Hero Background"
-              className="w-full h-auto block"
+              fill
+              className="object-cover"
               priority
               unoptimized
               quality={100}
             />
           </div>
 
-          {/* HERO CONTENT OVERLAY (Z-50 to be above Page 3, inside relative section to maintain position) */}
-          <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-4 pt-16 z-50 pointer-events-none">
-            <div className="flex flex-col items-center justify-center w-full max-w-[1240px] mt-[-15vw] sm:mt-[-10vw] md:mt-[-8vw] pointer-events-auto">
+          {/* BACKGROUND STITCHING FOR LOWER SECTIONS */}
+          <div className="absolute inset-0 -z-10 pointer-events-none">
+             {[1, 2, 3, 4].map((index) => (
+               <div 
+                 key={index}
+                 className="absolute w-full h-[110vh]"
+                 style={{ 
+                   top: `${105 + (index - 1) * 99}vh`, // Start right at the buffer point (105vh)
+                   maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)',
+                   WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)',
+                 }}
+               >
+                 <Image 
+                   src="/page3.avif" 
+                   alt={`Island Layer ${index}`}
+                   fill
+                   className="object-cover"
+                   unoptimized
+                   quality={100}
+                 />
+               </div>
+             ))}
+          </div>
+
+          {/* HERO CONTENT OVERLAY */}
+          <div className="absolute top-0 left-0 w-full h-screen flex flex-col items-center justify-center px-4 pt-16 z-50 pointer-events-none">
+            <div className="flex flex-col items-center justify-center w-full max-w-[1240px] mt-[-10vw] pointer-events-auto">
               <Image 
                 src={logoImg} 
                 alt="Logo"
