@@ -199,32 +199,46 @@ export default function Home() {
           <h3 className="text-3xl font-bubblebaz text-gray-900 tracking-normal mb-6 drop-shadow-sm font-normal">
             SOCIALS
           </h3>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap">
-            {config?.twitter_url && (
-              <a href={config.twitter_url} target="_blank" rel="noopener noreferrer" className="w-[60px] h-[60px] flex items-center justify-center bg-gray-900 hover:bg-black text-white rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
-                <img src="/social/x.avif" alt="Twitter/X" className="w-8 h-8 object-contain brightness-0 invert" />
-              </a>
-            )}
-            {config?.community_url && (
-              <a href={config.community_url} target="_blank" rel="noopener noreferrer" className="w-[60px] h-[60px] flex items-center justify-center bg-gray-900 hover:bg-black text-white rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
-                <img src="/social/community.avif" alt="Community" className="w-8 h-8 object-contain brightness-0 invert" />
-              </a>
-            )}
-            {config?.telegram_url && (
-              <a href={config.telegram_url} target="_blank" rel="noopener noreferrer" className="w-[60px] h-[60px] flex items-center justify-center bg-gray-900 hover:bg-black text-white rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
-                <img src="/social/community.avif" alt="Telegram" className="w-8 h-8 object-contain brightness-0 invert" />
-              </a>
-            )}
-            {chartUrl && (
-              <a href={chartUrl} target="_blank" rel="noopener noreferrer" className="w-[60px] h-[60px] flex items-center justify-center bg-gray-900 hover:bg-black text-white rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
-                <img src="/social/dex.avif" alt="Chart" className="w-8 h-8 object-contain brightness-0 invert" />
-              </a>
-            )}
-            {buyUrl && (
-              <a href={buyUrl} target="_blank" rel="noopener noreferrer" className="h-[60px] px-6 font-bubblebaz tracking-widest text-2xl flex items-center justify-center bg-[#FFD700] hover:bg-[#F2C900] text-black rounded-xl transition-all shadow-sm active:scale-95 border-2 border-gray-900 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-[2px_2px_0px_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px]">
-                BUY
-              </a>
-            )}
+          <div className="flex items-center justify-center gap-6 flex-wrap">
+            {/* 1. X (TWITTER) */}
+            <a 
+              href={config?.twitter_url || "#"} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="w-14 h-14 flex items-center justify-center bg-[#FFD700] border-[4px] border-gray-900 shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-2xl hover:bg-[#F2C900] hover:translate-x-[2px] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
+            >
+              <img src="/social/x.avif" alt="X/Twitter" className="w-8 h-8 object-contain brightness-0" />
+            </a>
+
+            {/* 2. COMMUNITY (TELEGRAM/GROUPS) */}
+            <a 
+              href={config?.telegram_url || config?.community_url || "#"} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="w-14 h-14 flex items-center justify-center bg-[#FFD700] border-[4px] border-gray-900 shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-2xl hover:bg-[#F2C900] hover:translate-x-[2px] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
+            >
+              <img src="/social/community.avif" alt="Community" className="w-8 h-8 object-contain brightness-0" />
+            </a>
+
+            {/* 3. DEX (CHART) */}
+            <a 
+              href={chartUrl || "#"} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="w-14 h-14 flex items-center justify-center bg-[#FFD700] border-[4px] border-gray-900 shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-2xl hover:bg-[#F2C900] hover:translate-x-[2px] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
+            >
+              <img src="/social/dex.avif" alt="Eagle/Dex" className="w-8 h-8 object-contain brightness-0" />
+            </a>
+
+            {/* BUY BUTTON (SEPARATE LARGE BUTTON) */}
+            <a 
+              href={buyUrl || "#"} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="h-14 px-8 font-bubblebaz tracking-widest text-2xl flex items-center justify-center bg-[#FFD700] border-[4px] border-gray-900 shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-2xl hover:bg-[#F2C900] hover:translate-x-[2px] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
+            >
+              BUY
+            </a>
           </div>
         </div>
 
