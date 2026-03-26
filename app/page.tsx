@@ -214,7 +214,7 @@ export default function Home() {
     <div className="min-h-[100dvh] bg-transparent text-gray-900 font-sans selection:bg-gray-200">
       
       {/* NAVBAR */}
-      <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-4 px-6 py-2 bg-[#FFD700] shadow-clay-yellow rounded-2xl border-none">
+      <nav className="fixed top-10 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-4 px-6 py-2 bg-[#FFD700] shadow-clay-yellow rounded-2xl border-none">
         <a href="#" className="font-bubblebaz text-xl tracking-wider text-gray-900 hover:scale-105 transition-all px-2 uppercase">HOME</a>
         <a href="#about" className="font-bubblebaz text-xl tracking-wider text-gray-900 hover:scale-105 transition-all px-2 uppercase">ABOUT</a>
         <a 
@@ -274,11 +274,11 @@ export default function Home() {
 
           {/* HERO CONTENT OVERLAY */}
           <div className="absolute top-0 left-0 w-full h-screen flex flex-col items-center justify-center px-4 pt-16 z-50 pointer-events-none">
-            <div className="flex flex-col items-center justify-center w-full max-w-[1240px] mt-[-10vw] pointer-events-auto">
+            <div className="flex flex-col items-center justify-center w-full max-w-[1240px] mt-0 pointer-events-auto">
               <Image 
                 src={logoImg} 
                 alt="Logo"
-                className="w-[50%] sm:w-[45%] md:w-[35%] lg:w-[25%] max-w-[600px] h-auto object-contain mb-8"
+                className="w-[50%] sm:w-[45%] md:w-[35%] lg:w-[28%] max-w-[550px] h-auto object-contain mb-8"
                 priority
                 unoptimized
               />
