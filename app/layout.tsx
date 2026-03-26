@@ -20,9 +20,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://theskullmeme.wtf/"),
-  title: "Skull",
-  description: "A collection of internet moments, relatable memes (me_irl), and curated funny posts from X, Instagram, and Reddit.",
+  metadataBase: new URL("https://thetomodachimeme.wtf/"),
+  title: "Tomodachi",
+  description: "Experience the nostalgic 'waku waku' life with Tomodachi Collection. A community dedicated to the quirky lives and internet moments of Miis on the island.",
   icons: {
     icon: [
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
@@ -31,23 +31,23 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
   },
   openGraph: {
-    title: "Skull",
-    description: "A collection of internet moments, relatable memes (me_irl), and curated funny posts from X, Instagram, and Reddit.",
-    url: "https://theskullmeme.wtf/",
-    siteName: "Skull Meme",
+    title: "Tomodachi",
+    description: "Experience the nostalgic 'waku waku' life with Tomodachi Collection. A community dedicated to the quirky lives and internet moments of Miis on the island.",
+    url: "https://thetomodachimeme.wtf/",
+    siteName: "Tomodachi Meme",
     images: [
       {
         url: "/Og.jpg",
         width: 1200,
         height: 630,
-        alt: "Skull Open Graph Image",
+        alt: "Tomodachi Open Graph Image",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Skull",
-    description: "A collection of internet moments, relatable memes (me_irl), and curated funny posts from X, Instagram, and Reddit.",
+    title: "Tomodachi",
+    description: "Experience the nostalgic 'waku waku' life with Tomodachi Collection. A community dedicated to the quirky lives and internet moments of Miis on the island.",
     images: ["/Og.jpg"],
   },
 };

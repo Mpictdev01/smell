@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from "react";
 import { Tweet } from "react-tweet";
-import { toPng } from "html-to-image";
 import { useProjectConfig } from "@/lib/useProjectConfig";
 import Image from "next/image";
 import { motion, useAnimation, useMotionValue } from "framer-motion";
@@ -135,31 +134,6 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  const [memeText, setMemeText] = useState("");
-  const memeRef = useRef<HTMLDivElement>(null);
-
-  const downloadMeme = async () => {
-    if (memeRef.current === null) {
-      return;
-    }
-    
-    try {
-      // Small timeout/delay can sometimes help rendering
-      const dataUrl = await toPng(memeRef.current, { 
-        cacheBust: true,
-        backgroundColor: '#FFFFFF',
-        pixelRatio: 2 // High quality download
-      });
-      
-      const link = document.createElement('a');
-      link.download = 'make-your-own-dad-meme.png';
-      link.href = dataUrl;
-      link.click();
-    } catch (err) {
-      console.error('Failed to generate image', err);
-    }
-  };
-
   return (
     <div className="min-h-[100dvh] bg-transparent text-gray-900 font-sans selection:bg-gray-200">
       
@@ -180,11 +154,11 @@ export default function Home() {
             />
           </div>
           
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="absolute top-0 left-0 w-full h-[100dvh] flex items-center justify-center pointer-events-none">
             <Image 
               src={logoImg} 
               alt="Logo"
-              className="w-[70%] sm:w-[60%] md:w-[50%] lg:w-[40%] max-w-[800px] h-auto object-contain drop-shadow-2xl"
+              className="w-[50%] sm:w-[45%] md:w-[35%] lg:w-[25%] max-w-[600px] h-auto object-contain drop-shadow-2xl"
               priority
               unoptimized
             />
@@ -215,10 +189,10 @@ export default function Home() {
         <div className="max-w-[800px] mx-auto text-center mb-8">
           <div className="space-y-4 text-base md:text-lg text-gray-600 leading-relaxed font-medium mb-12">
             <p>
-              The meme comes from the 2006 animated film Monster House, where the character’s strange expression and awkward energy have helped it regain virality across social media recently.
+              Tomodachi Collection is a nostalgic life simulation game that captured our hearts with its quirky Miis and unpredictable island life. 
             </p>
             <p>
-              The character Reginald &ldquo;Skull&rdquo; Skulinski is a crew member at Pizza Freak, known for his awkward personality and the distinct look that has made him a popular reaction meme.
+              From weird dreams to unexpected friendships, it&apos;s all about the &ldquo;waku waku&rdquo; (exciting) moments that make every day on the island a surprise. Join the community as we celebrate the unique personalities and hilarious internet moments that only Tomodachi can deliver.
             </p>
           </div>
           
@@ -275,66 +249,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 1.5: MEME GENERATOR */}
-      <section className="w-full py-8 md:py-16 px-6">
-        <div className="max-w-[1240px] mx-auto">
-          
-          <div className="mb-8 text-center">
-            <h1 className="text-4xl md:text-6xl font-bubblebaz text-gray-900 tracking-normal mb-2 drop-shadow-sm font-normal">
-              Make Your Own Meme
-            </h1>
-          </div>
 
-          <div className="flex flex-col md:flex-row items-start justify-center gap-10">
-            
-            {/* MEME PREVIEW CONTAINER */}
-            <div className="w-full md:w-[400px] flex-shrink-0 flex justify-center">
-              <div 
-                ref={memeRef} 
-                className="w-full bg-white flex flex-col p-4 border border-gray-100 shadow-sm"
-              >
-                <div className="text-xl md:text-2xl font-medium text-gray-900 leading-snug mb-4 whitespace-pre-wrap break-words min-h-[4rem]">
-                  {memeText || "When you sold the bottom on $SKULL instead of buying more"}
-                </div>
-                <div className="w-full rounded-[14px] overflow-hidden relative leading-none flex">
-                  <img 
-                    src="/hero.avif" 
-                    alt="Make Your Own Dad Meme"
-                    className="w-full h-auto block"
-                    crossOrigin="anonymous"
-                  />
-                  <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-[14px] pointer-events-none"></div>
-                </div>
-              </div>
-            </div>
-
-            {/* CONTROLS */}
-            <div className="w-full md:w-[320px] bg-white p-6 rounded-3xl border border-gray-200 shadow-sm flex flex-col gap-5 sticky top-12">
-              <div>
-
-                <textarea 
-                  className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-base rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all min-h-[120px] resize-none"
-                  placeholder="Enter your custom meme caption here..."
-                  value={memeText}
-                  onChange={(e) => setMemeText(e.target.value)}
-                  maxLength={150}
-                ></textarea>
-                <div className="text-right text-xs text-gray-400 mt-1">
-                  {memeText.length}/150
-                </div>
-              </div>
-              
-              <button 
-                onClick={downloadMeme}
-                className="w-full bg-gray-900 hover:bg-black text-white font-bold py-3.5 px-4 rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 shadow-sm"
-              >
-                Download Meme
-              </button>
-            </div>
-            
-          </div>
-        </div>
-      </section>
 
       {/* SECTION 2: TWITTER X SLIDER */}
       <section className="w-full px-4 md:px-8 pb-32 pt-16 relative z-30 flex justify-center -mt-8">
