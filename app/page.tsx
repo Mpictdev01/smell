@@ -227,14 +227,14 @@ export default function Home() {
 
       <div className="relative w-full">
         {/* SECTION 1: HERO LAYER */}
-        <section className="relative w-full min-h-[115vh] overflow-hidden bg-[#B0E0E6]">
+        <section className="relative w-full min-h-[125vh] overflow-hidden bg-[#B0E0E6]">
           
           {/* HERO BACKGROUND */}
           <div 
-            className="absolute inset-x-0 top-0 h-[115vh] z-10 leading-[0]"
+            className="absolute inset-x-0 top-0 h-[125vh] z-10 leading-[0]"
             style={{ 
-              maskImage: 'linear-gradient(to bottom, black 105vh, transparent 115vh)',
-              WebkitMaskImage: 'linear-gradient(to bottom, black 105vh, transparent 115vh)'
+              maskImage: 'linear-gradient(to bottom, black 115vh, transparent 125vh)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 115vh, transparent 125vh)'
             }}
           >
             <Image 
@@ -255,7 +255,7 @@ export default function Home() {
                  key={index}
                  className="absolute w-full h-[110vh]"
                  style={{ 
-                   top: `${105 + (index - 1) * 99}vh`, // Start right at the buffer point (105vh)
+                   top: `${115 + (index - 1) * 99}vh`, // Start right at the buffer point (115vh)
                    maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)',
                    WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)',
                  }}
