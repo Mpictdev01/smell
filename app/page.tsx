@@ -42,7 +42,6 @@ export default function Home() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [carouselWidth, setCarouselWidth] = useState(0);
-  const [isJupiterLoaded, setIsJupiterLoaded] = useState(false);
   const controls = useAnimation();
   const dragX = useMotionValue(0);
 
@@ -163,50 +162,50 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Robust Polling for Jupiter Initialization
+  // Master Injection & Initialization for Jupiter Plugin V1 (No Deprecation Message)
   useEffect(() => {
     if (!mounted || !config?.contract_address) return;
 
-    const initJupiter = () => {
+    const initWidget = () => {
       const jupTerminal = document.getElementById('jupiter-terminal');
-      if ((window as any).Jupiter && jupTerminal && config?.contract_address) {
-        setTimeout(() => {
-          (window as any).Jupiter.init({
-            displayMode: "integrated",
-            integratedTargetId: "jupiter-terminal",
-            endpoint: "https://rpc.ankr.com/solana",
-            strictTokenList: false,
-            formProps: {
-              initialInputMint: "So11111111111111111111111111111111111111112",
-              initialOutputMint: config.contract_address,
-            },
-          });
-        }, 200);
+      if ((window as any).Jupiter && jupTerminal && config.contract_address) {
+        (window as any).Jupiter.init({
+          displayMode: "integrated",
+          integratedTargetId: "jupiter-terminal",
+          endpoint: "https://api.mainnet-beta.solana.com",
+          strictTokenList: false,
+          formProps: {
+            initialInputMint: "So11111111111111111111111111111111111111112",
+            initialOutputMint: config.contract_address.trim(),
+          },
+        });
         return true;
       }
       return false;
     };
 
-    if (isJupiterLoaded || (window as any).Jupiter) {
-      if (initJupiter()) return;
+    // 1. Manually Inject Plugin Script
+    const existingScript = document.querySelector('script[src*="plugin.jup.ag"]');
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.src = "https://plugin.jup.ag/plugin-v1.js";
+      script.async = true;
+      script.onload = () => setTimeout(initWidget, 500);
+      document.body.appendChild(script);
+    } else {
+      initWidget();
     }
 
-    let retryCount = 0;
-    const maxRetries = 20;
-
-    const pollJupiter = setInterval(() => {
-      if (initJupiter()) {
-        clearInterval(pollJupiter);
+    // 2. Persistent Polling to ensure widget appears without gaps
+    const interval = setInterval(() => {
+      const terminalDiv = document.getElementById('jupiter-terminal');
+      if (terminalDiv && terminalDiv.children.length === 0 && (window as any).Jupiter) {
+        if (initWidget()) clearInterval(interval);
       }
+    }, 1500);
 
-      retryCount++;
-      if (retryCount >= maxRetries) {
-        clearInterval(pollJupiter);
-      }
-    }, 500);
-
-    return () => clearInterval(pollJupiter);
-  }, [mounted, config?.contract_address, isJupiterLoaded]);
+    return () => clearInterval(interval);
+  }, [mounted, config?.contract_address]);
 
 
 
@@ -448,11 +447,6 @@ export default function Home() {
 
         {/* SECTION 3: JUP.SWAP */}
         <section id="buy" className="w-full px-6 pb-32 pt-16 relative z-10 flex flex-col items-center overflow-hidden">
-          <Script 
-            src="https://terminal.jup.ag/main-v2.js" 
-            strategy="afterInteractive"
-            onLoad={() => setIsJupiterLoaded(true)}
-          />
           <div className="max-w-[1240px] w-full mx-auto">
             {/* Title with matching style */}
             <div className="text-center mb-16 px-4">
@@ -472,7 +466,7 @@ export default function Home() {
                 >
                   <h3 className="text-3xl font-bubblebaz text-gray-900 mb-8 text-center tracking-wider">SWAP $TOMODACHI</h3>
                   <div className="flex-1 w-full relative rounded-2xl overflow-hidden bg-white/40 backdrop-blur-sm border-2 border-gray-900/10">
-                    <div key={config?.contract_address} id="jupiter-terminal" className="w-full h-full min-h-[500px]" />
+                    <div id="jupiter-terminal" className="w-full h-full min-h-[500px]" />
                   </div>
                 </div>
               </div>
@@ -485,13 +479,18 @@ export default function Home() {
                   <h3 className="text-3xl font-bubblebaz text-gray-900 mb-8 text-center tracking-wider">LIVE CHART</h3>
                   <div className="flex-1 w-full relative rounded-2xl overflow-hidden bg-white/40 backdrop-blur-sm border-2 border-gray-900/10">
                     {config?.contract_address ? (
-                      <div className="absolute inset-0 overflow-hidden bg-black">
+                      <div className="absolute inset-0 overflow-hidden bg-[#131722]">
                         <iframe 
                           src={`https://dexscreener.com/solana/${config.contract_address}?embed=1&theme=dark&trades=0&info=0&chart=1`} 
-                          className="absolute w-[calc(100%+80px)] h-[calc(100%+120px)] -top-[80px] -left-[60px] border-none"
-                          style={{ maxWidth: 'none' }}
+                          className="absolute border-none"
+                          style={{ 
+                            top: '-82px', 
+                            left: '-62px', 
+                            width: 'calc(100% + 82px)', 
+                            height: 'calc(100% + 100px)',
+                            maxWidth: 'none'
+                          }}
                           title="DexScreener Chart"
-                          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                         />
                       </div>
                     ) : (
