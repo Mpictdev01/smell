@@ -217,9 +217,7 @@ export default function Home() {
         <a href="#" className="font-bubblebaz text-xl tracking-wider text-gray-900 hover:scale-105 transition-all px-2 uppercase">HOME</a>
         <a href="#about" className="font-bubblebaz text-xl tracking-wider text-gray-900 hover:scale-105 transition-all px-2 uppercase">ABOUT</a>
         <a 
-          href={buyUrl || "#"} 
-          target="_blank" 
-          rel="noopener noreferrer" 
+          href="#buy" 
           className="font-bubblebaz text-xl tracking-wider text-gray-900 hover:scale-105 transition-all px-2 uppercase"
         >
           BUY
